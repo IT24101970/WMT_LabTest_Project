@@ -3,12 +3,19 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import itemRoutes from "./routes/itemRoutes.js";
+import * as https from "node:https";
 
 dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://spectacular-yeot-334feb.netlify.app/', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
